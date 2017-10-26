@@ -77,7 +77,17 @@ public class BlackJack {
         for(int i = 0; i < (4*numOfDecks); i++)
             cards.add('A');
         
+        // shuffle the cards
+        Collections.shuffle(cards);
         
+        // place the cards in a stack
+        Stack<Character> deck = new Stack();
+        for(int i = 0; i < cards.size(); i++){
+            deck.push(cards.get(i));
+        }
+    }
+    
+    public void shuffleCards(int numOfDecks){
         
     }
     
