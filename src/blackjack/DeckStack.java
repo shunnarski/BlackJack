@@ -21,8 +21,9 @@ public class DeckStack<T> {
     
     // Constructor for creating the DeckStack used to play the game of blackjack
     public DeckStack(int numOfDecks) {
-        createCardMap();
+        map = new HashMap();
         this.numOfDecks = numOfDecks;
+        createCardMap();
         createDeck(numOfDecks);    
     }
     
@@ -89,7 +90,7 @@ public class DeckStack<T> {
             t = t.next;
         }
         
-        return (bustCount / this.size());
+        return ((bustCount / this.size()) * 100);
         
     }
     
@@ -117,7 +118,7 @@ public class DeckStack<T> {
     This method takes in an integer that represents the number of 
     decks used to play the game of blackjack
     */
-    public void createDeck(int numOfDecks){
+    private void createDeck(int numOfDecks){
         //create the deck
         ArrayList<Character> cards = new ArrayList();
         for(int i = 0; i < (4*numOfDecks); i++)

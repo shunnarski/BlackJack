@@ -50,6 +50,12 @@ public class BlackJack {
             ai.setName(name);
             players.add(ai);
         }
+        
+        for(int i = 0; i < players.size(); i++){
+            if(players.get(i) instanceof UserPlayer){
+                System.out.println(players.get(i).getName());
+            }
+        } 
     }
-      
+     
 }
