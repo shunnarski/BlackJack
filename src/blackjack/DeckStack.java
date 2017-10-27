@@ -3,7 +3,9 @@ Stack implementation for a deck of cards in the game of black
 */
 package blackjack;
 import java.util.*;
-public class DeckStack {
+
+
+public class DeckStack<T> {
     private class Card{
         char value;
         Card next;
@@ -13,31 +15,144 @@ public class DeckStack {
         } 
     }   
     private Card top;
-    private int value = 0;
-
+    private static HashMap<Character, Integer> map;
+    private int deckCount = 0;
+    private final int numOfDecks;
+    
+    // Constructor for creating the DeckStack used to play the game of blackjack
+    public DeckStack(int numOfDecks) {
+        createCardMap();
+        this.numOfDecks = numOfDecks;
+        createDeck(numOfDecks);    
+    }
+    
+    /*
+    Pushes a new value on the top of the stack
+    */
     public void push(char c){
         Card card = new Card(c);
         card.next = top;
         top = card;
+        deckCount++;
     }
     
+    /*
+    Pops the value at the top of the stack. After the card is popped from the stack
+    it is out of the stack
+    */
     public char pop(){
         if(top == null) throw new EmptyStackException();
         char c = top.value;
         top = top.next;
+        deckCount--;
+        if(isEmpty()){
+            createDeck(numOfDecks);
+        }
         return c;
     }
     
+    /*
+    This value returns true if the stack is currently empty
+    and false if otherwise
+    */
     public boolean isEmpty(){
         return top == null;
     }
     
+    /*
+    This method returns the value at the top of the stack
+    */
     public char peek(){
         if(top == null) throw new EmptyStackException();
         return top.value;
     }
     
-    public int getStackVals(){
-        return 0;
+    public int size(){
+        return deckCount;
     }
+    
+    /*
+    Takes in one parameter: currentVal which is the value of the cards
+    a player currently has. This value is used to determine the number of cards
+    in the deck to draw from that will cause this number to go over 21.
+    
+    This methods calculates the chance of a bust if the player decides to hit
+    */
+    public double chanceOfBust(int currentVal){
+        Card t = top;
+        double bustCount = 0;
+        final int bustVal = 21 - currentVal;
+        while(t != null){
+            if(map.get(t.value) > bustVal){
+                bustCount++;
+            }
+            t = t.next;
+        }
+        
+        return (bustCount / this.size());
+        
+    }
+    
+    /*
+    This method maps each character value in the card 
+    to an integer value
+    */
+    public static void createCardMap(){
+        map.put('2', 2);
+        map.put('3', 3);
+        map.put('4', 4);
+        map.put('5', 5);
+        map.put('6', 6);
+        map.put('7', 7);
+        map.put('8', 8);
+        map.put('9', 9);
+        map.put('T', 10);
+        map.put('J', 10);
+        map.put('Q', 10);
+        map.put('K', 10);
+        map.put('A', 1);
+    }
+    
+    /*
+    This method takes in an integer that represents the number of 
+    decks used to play the game of blackjack
+    */
+    public void createDeck(int numOfDecks){
+        //create the deck
+        ArrayList<Character> cards = new ArrayList();
+        for(int i = 0; i < (4*numOfDecks); i++)
+            cards.add('2');
+        for(int i = 0; i < (4*numOfDecks); i++)
+            cards.add('3');
+        for(int i = 0; i < (4*numOfDecks); i++)
+            cards.add('4');
+        for(int i = 0; i < (4*numOfDecks); i++)
+            cards.add('5');
+        for(int i = 0; i < (4*numOfDecks); i++)
+            cards.add('6');
+        for(int i = 0; i < (4*numOfDecks); i++)
+            cards.add('7');
+        for(int i = 0; i < (4*numOfDecks); i++)
+            cards.add('8');
+        for(int i = 0; i < (4*numOfDecks); i++)
+            cards.add('9');
+        for(int i = 0; i < (4*numOfDecks); i++)
+            cards.add('T');
+        for(int i = 0; i < (4*numOfDecks); i++)
+            cards.add('J');
+        for(int i = 0; i < (4*numOfDecks); i++)
+            cards.add('Q');
+        for(int i = 0; i < (4*numOfDecks); i++)
+            cards.add('K');
+        for(int i = 0; i < (4*numOfDecks); i++)
+            cards.add('A');
+        
+        // shuffle the cards
+        Collections.shuffle(cards);
+        
+        for(int i = 0; i < cards.size(); i++){
+            this.push(cards.get(i));
+        }
+    }
+    
 }

@@ -13,9 +13,11 @@ import java.util.*;
  * @author alecshunnarah
  */
 public class BlackJack {
-    public static HashMap<Character, Integer> cardVals = new HashMap();
-    private static Stack<Character> deck = new Stack();
+    private static DeckStack deck;
    
+    /*
+    Driver method 
+    */
     public static void main(String[] args) {
         
         // get the number of decks that we will be playing with and the number of players
@@ -26,11 +28,16 @@ public class BlackJack {
         int numOfDecks = in.nextInt();
         System.out.print("How many players will be in this game? ");
         int numOfPlayers = in.nextInt();
-        playBlackJack(numOfDecks, numOfPlayers, playerName);
+        deck = new DeckStack(numOfDecks);
+        playBlackJack(numOfPlayers, playerName);
         
     }
     
-    public static void playBlackJack(int numOfDecks, int numOfPlayers, String playerName){
+    /*
+    This method is responsible for getting the user setup for playing the game
+    of BlackJack
+    */
+    public static void playBlackJack(int numOfPlayers, String playerName){
         ArrayList<Player> players = new ArrayList();
         
         // create players for the game
@@ -44,60 +51,5 @@ public class BlackJack {
             players.add(ai);
         }
     }
-    
-    
-    
-    // shuffles the cards to be reused in the deck stack
-    public void shuffleCards(int numOfDecks){
-        cardVals.put('2', 2);
-        cardVals.put('3', 3);
-        cardVals.put('4', 4);
-        cardVals.put('5', 5);
-        cardVals.put('6', 6);
-        cardVals.put('7', 7);
-        cardVals.put('8', 8);
-        cardVals.put('9', 9);
-        cardVals.put('T', 10);
-        cardVals.put('J', 10);
-        cardVals.put('Q', 10);
-        cardVals.put('K', 10);
-        cardVals.put('A', 1);
-           
-        //create the deck
-        ArrayList<Character> cards = new ArrayList();
-        for(int i = 0; i < (4*numOfDecks); i++)
-            cards.add('2');
-        for(int i = 0; i < (4*numOfDecks); i++)
-            cards.add('3');
-        for(int i = 0; i < (4*numOfDecks); i++)
-            cards.add('4');
-        for(int i = 0; i < (4*numOfDecks); i++)
-            cards.add('5');
-        for(int i = 0; i < (4*numOfDecks); i++)
-            cards.add('6');
-        for(int i = 0; i < (4*numOfDecks); i++)
-            cards.add('7');
-        for(int i = 0; i < (4*numOfDecks); i++)
-            cards.add('8');
-        for(int i = 0; i < (4*numOfDecks); i++)
-            cards.add('9');
-        for(int i = 0; i < (4*numOfDecks); i++)
-            cards.add('T');
-        for(int i = 0; i < (4*numOfDecks); i++)
-            cards.add('J');
-        for(int i = 0; i < (4*numOfDecks); i++)
-            cards.add('Q');
-        for(int i = 0; i < (4*numOfDecks); i++)
-            cards.add('K');
-        for(int i = 0; i < (4*numOfDecks); i++)
-            cards.add('A');
-        
-        // shuffle the cards
-        Collections.shuffle(cards);
-        
-        for(int i = 0; i < cards.size(); i++){
-            deck.push(cards.get(i));
-        }
-    }
-    
+      
 }
