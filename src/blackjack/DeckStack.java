@@ -38,6 +38,6 @@ public class DeckStack {
     }
     
     public int getStackVals(){
-        
+        return 0;
     }
 }
