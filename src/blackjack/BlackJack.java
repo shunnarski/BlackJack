@@ -13,8 +13,8 @@ import java.util.*;
  * @author alecshunnarah
  */
 public class BlackJack {
-    private static HashMap<Character, Integer> cardVals = new HashMap();
-    
+    public static HashMap<Character, Integer> cardVals = new HashMap();
+    private static Stack<Character> deck = new Stack();
    
     public static void main(String[] args) {
         
@@ -31,6 +31,24 @@ public class BlackJack {
     }
     
     public static void playBlackJack(int numOfDecks, int numOfPlayers, String playerName){
+        ArrayList<Player> players = new ArrayList();
+        
+        // create players for the game
+        UserPlayer user = new UserPlayer();
+        user.setName(playerName);
+        players.add(user);
+        for(int i = 0; i < numOfPlayers - 1; i++){
+            CompPlayer ai = new CompPlayer();
+            String name = "COMP" + (i+1);
+            ai.setName(name);
+            players.add(ai);
+        }
+    }
+    
+    
+    
+    // shuffles the cards to be reused in the deck stack
+    public void shuffleCards(int numOfDecks){
         cardVals.put('2', 2);
         cardVals.put('3', 3);
         cardVals.put('4', 4);
@@ -44,10 +62,7 @@ public class BlackJack {
         cardVals.put('Q', 10);
         cardVals.put('K', 10);
         cardVals.put('A', 1);
-        
-        Player user = new Player();
-        user.setName(playerName);
-        
+           
         //create the deck
         ArrayList<Character> cards = new ArrayList();
         for(int i = 0; i < (4*numOfDecks); i++)
@@ -80,15 +95,9 @@ public class BlackJack {
         // shuffle the cards
         Collections.shuffle(cards);
         
-        // place the cards in a stack
-        Stack<Character> deck = new Stack();
         for(int i = 0; i < cards.size(); i++){
             deck.push(cards.get(i));
         }
-    }
-    
-    public void shuffleCards(int numOfDecks){
-        
     }
     
 }
