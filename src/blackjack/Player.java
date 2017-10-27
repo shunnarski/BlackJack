@@ -21,7 +21,11 @@ public class Player {
         return playerName;
     }
     
-    public int getCardValues(HashMap<Character, Integer> map){
+    public ArrayList<Character> getCards(){
+        return playerCards;
+    }
+    
+    public int totalCardValue(HashMap<Character, Integer> map){
         int value = 0;
         for(int i = 0; i < playerCards.size(); i++){
             value += map.get(playerCards.get(i));
