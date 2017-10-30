@@ -16,5 +16,9 @@ the current class, the "super" key word points to the parent class.
 */
 public class Dealer extends Player {
     
+    public void printCardNoFlip(){
+        System.out.print(super.getName() + ": ");
+        System.out.println(super.getCards().get(0) + " ?");
+    }
     
 }

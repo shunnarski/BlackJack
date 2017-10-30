@@ -15,9 +15,9 @@ public class DeckStack<T> {
         } 
     }   
     private Card top;
-    private static HashMap<Character, Integer> map;
+    public static HashMap<Character, Integer> map;
     private int deckCount = 0;
-    private final int numOfDecks;
+    private int numOfDecks = 0;
     
     // Constructor for creating the DeckStack used to play the game of blackjack
     public DeckStack(int numOfDecks) {
@@ -25,6 +25,11 @@ public class DeckStack<T> {
         this.numOfDecks = numOfDecks;
         createCardMap();
         createDeck(numOfDecks);    
+    }
+    
+    public DeckStack(){
+        map = new HashMap();
+        createCardMap();
     }
     
     /*

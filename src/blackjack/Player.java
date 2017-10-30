@@ -25,10 +25,11 @@ public class Player {
         return playerCards;
     }
     
-    public int totalCardValue(HashMap<Character, Integer> map){
+    public int totalCardValue(){
+        DeckStack stack = new DeckStack();
         int value = 0;
         for(int i = 0; i < playerCards.size(); i++){
-            value += map.get(playerCards.get(i));
+            value += stack.map.get(playerCards.get(i));
         }
         
         return value;
@@ -38,6 +39,16 @@ public class Player {
         playerCards.add(c);
     }
     
+    public void printAllCards(){
+        DeckStack stack = new DeckStack();
+        System.out.print(this.playerName + ": ");
+        for(char c: this.getCards()){
+            System.out.print(c + " ");
+        }
+        if(this.totalCardValue() > 21){
+            System.out.print("BUST");
+        }
+    }
     
     
     
