@@ -27,11 +27,23 @@ public class Player {
     
     public int totalCardValue(){
         DeckStack stack = new DeckStack();
+        int aceCount = 0;
         int value = 0;
         for(int i = 0; i < playerCards.size(); i++){
-            value += stack.map.get(playerCards.get(i));
+            if(playerCards.get(i) == 'A') {
+                value += 11;
+                aceCount++;
+            }
+            else {
+                value += stack.map.get(playerCards.get(i));
+            }
+            
         }
-        
+        int x = aceCount;
+        while(value > 21 && x > 0){
+            value -= 10;
+            x--;
+        } 
         return value;
     }
     
