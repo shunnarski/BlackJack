@@ -126,32 +126,21 @@ public class DeckStack<T> {
     private void createDeck(int numOfDecks){
         //create the deck
         ArrayList<Character> cards = new ArrayList();
-        for(int i = 0; i < (4*numOfDecks); i++)
+        for(int i = 0; i < (4*numOfDecks); i++) {
             cards.add('2');
-        for(int i = 0; i < (4*numOfDecks); i++)
             cards.add('3');
-        for(int i = 0; i < (4*numOfDecks); i++)
             cards.add('4');
-        for(int i = 0; i < (4*numOfDecks); i++)
             cards.add('5');
-        for(int i = 0; i < (4*numOfDecks); i++)
             cards.add('6');
-        for(int i = 0; i < (4*numOfDecks); i++)
             cards.add('7');
-        for(int i = 0; i < (4*numOfDecks); i++)
             cards.add('8');
-        for(int i = 0; i < (4*numOfDecks); i++)
             cards.add('9');
-        for(int i = 0; i < (4*numOfDecks); i++)
             cards.add('T');
-        for(int i = 0; i < (4*numOfDecks); i++)
             cards.add('J');
-        for(int i = 0; i < (4*numOfDecks); i++)
             cards.add('Q');
-        for(int i = 0; i < (4*numOfDecks); i++)
             cards.add('K');
-        for(int i = 0; i < (4*numOfDecks); i++)
             cards.add('A');
+        }
         
         // shuffle the cards
         Collections.shuffle(cards);
